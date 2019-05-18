@@ -1,4 +1,5 @@
 import numpy as np
+import pygame 
 
 ROW_COUNT = 6 
 COLUMN_COUNT = 7 
@@ -54,6 +55,22 @@ board = create_board()
 print_board(board)
 game_over = False;
 turn = 0 
+
+#We are initializing our pygame. 
+#We have to do this before we start any pygame project 
+pygame.init()
+
+SQUARE_SIZE = 100
+
+width = COLUMN_COUNT * SQUARE_SIZE
+height = (ROW_COUNT+1) * SQUARE_SIZE 
+
+size = (width, height)
+
+screen = pygame.display.set_mode(size)
+#documentation for this is available on the pygame site 
+#pygame.org/docs - all the functions 
+
 
 while not game_over:
     #Ask for player 1 input
