@@ -19,8 +19,12 @@ def get_next_open_row(board, col):
         if board[r][col] == 0:
             return r
 
+def print_board(board):
+    print(np.flip(board, 0))
+    #This is a command in numpy which will flip. Zero is for the access. 
+
 board = create_board()
-print(board)
+print_board(board)
 game_over = False;
 turn = 0 
 
@@ -44,7 +48,8 @@ while not game_over:
             row = get_next_open_row(board, col)
             drop_piece(board, row, col, 2)
 
-    print(board)
+    print_board(board)
+
 
     turn += 1
     turn = turn % 2
