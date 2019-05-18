@@ -44,6 +44,12 @@ def winning_move(board, piece):
             if board[r][c] == piece and board[r+1][c+1] == piece and board[r+2][c+2] == piece and board[r+3][c+3] == piece:
                 return True
 
+    #check negatively sloped diagnals
+    for c in range(COLUMN_COUNT):
+        for r in range(3, ROW_COUNT):
+            if board[r][c] == piece and board[r-1][c+1] == piece and board[r-2][c+2] == piece and board[r-3][c+3] == piece:
+                return True
+
 board = create_board()
 print_board(board)
 game_over = False;
