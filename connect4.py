@@ -2,6 +2,11 @@ import numpy as np
 import pygame 
 import sys
 
+#global static variable - rgb value - very blue rgb value because 
+#the only color is blue out of red,green and blue
+BLUE = (0, 0, 255)
+
+
 ROW_COUNT = 6 
 COLUMN_COUNT = 7 
 
@@ -31,28 +36,40 @@ def winning_move(board, piece):
         #subtracted three because 3 of the colums could not work 
         #we need 4 columns to win the game so no point in checking last three
         for r in range(ROW_COUNT):
-            if board[r][c] == piece and board[r][c+1] == piece and board[r][c+2] == piece and board[r][c+3] == piece:
+            if board[r][c] == piece and board[r][c+1] == piece \
+                and board[r][c+2] == piece and board[r][c+3] == piece:
                 return True 
 
     #check all the vertical locations
     for c in range(COLUMN_COUNT):
         for r in range(ROW_COUNT-3):
-            if board[r][c] == piece and board[r+1][c] == piece and board[r+2][c] == piece and board[r+3][c] == piece:
+            if board[r][c] == piece and board[r+1][c] == piece \
+                and board[r+2][c] == piece and board[r+3][c] == piece:
                 return True
 
     #check positively sloped diagnals
     for c in range(COLUMN_COUNT):
         for r in range(ROW_COUNT-3):
-            if board[r][c] == piece and board[r+1][c+1] == piece and board[r+2][c+2] == piece and board[r+3][c+3] == piece:
+            if board[r][c] == piece and board[r+1][c+1] == piece \
+                and board[r+2][c+2] == piece and board[r+3][c+3] == piece:
                 return True
 
     #check negatively sloped diagnals
     for c in range(COLUMN_COUNT):
         for r in range(3, ROW_COUNT):
-            if board[r][c] == piece and board[r-1][c+1] == piece and board[r-2][c+2] == piece and board[r-3][c+3] == piece:
+            if board[r][c] == piece and board[r-1][c+1] == piece \
+                and board[r-2][c+2] == piece and board[r-3][c+3] == piece:
                 return True
 def draw_board(board):
-    pass
+    for c in range(COLUMN_COUNT):
+        for r in range(ROW_COUNT):
+            #intially there were be a blue rectangle and in that
+            #rectangle there will be a black circle 
+            pygame.draw.rect(screen, BLUE, (c*SQUARE_SIZE, r*SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE))
+            #you need 4 diff things - the size of the width and heigh 
+            # and also the position
+
+
 
 board = create_board()
 print_board(board)
@@ -72,7 +89,10 @@ size = (width, height)
 
 screen = pygame.display.set_mode(size)
 #documentation for this is available on the pygame site 
-#pygame.org/docs - all the functions 
+#pygame.org/docs - all the functions
+draw_board(board)
+pygame.display.update()
+
 
 
 while not game_over:
@@ -90,7 +110,7 @@ while not game_over:
             #website under the docs. Game is going to run by us 
             #clicking down on a specific spot on the screen
             #where we want to drop the piece
-            print("")
+            continue
             '''
             #Ask for player 1 input
             if turn == 0:
